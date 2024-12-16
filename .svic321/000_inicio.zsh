@@ -28,3 +28,5 @@ export VI_MODE_SET_CURSOR=true
 
 # bare git repository configuration
 alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
+
+# this is small change
