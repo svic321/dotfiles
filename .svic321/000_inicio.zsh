@@ -30,3 +30,4 @@ export VI_MODE_SET_CURSOR=true
 alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 
 # this is small change
+# this is another small change from the main branch
