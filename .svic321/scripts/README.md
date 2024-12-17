@@ -35,12 +35,12 @@ git clone --bare git@github.com:svic321/dotfiles.git $HOME/.dotfiles
 git clone --bare https://github.com/svic321/dotfiles $HOME/.dotfiles
 ```
 
-After, add the following lines to your `.zshrc` file:
+Once that done, run the following commands:
 ```bash
-if [[ -f ~/.svic321/000_inicio.zsh ]]; then
-  source ~/.svic321/000_inicio.zsh
-fi
+alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
+dotfiles config --local status.showUntrackedFiles no
 ```
+
 Then run:
 ```bash
 # attemp a checkout
@@ -54,6 +54,13 @@ dotfiles checkout 2>&1 | egrep "\s+\." | awk {'print $1'} | \
 xargs -I{} sh -c 'mkdir -p "$(dirname ".dotfiles-backup/{}")" && mv "{}" ".dotfiles-backup/{}"'
 ```
 Once that done, attemp again to checkout the repo.
+
+After, add the following lines to your `.zshrc` file:
+```bash
+if [[ -f ~/.svic321/000_inicio.zsh ]]; then
+  source ~/.svic321/000_inicio.zsh
+fi
+```
 
 Check your `.dotfiles/config` file to see if the untracked files are shown.
 The contens should be:
