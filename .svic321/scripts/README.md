@@ -56,16 +56,33 @@ xargs -I{} sh -c 'mkdir -p "$(dirname ".dotfiles-backup/{}")" && mv "{}" ".dotfi
 Once that done, attemp again to checkout the repo.
 
 Check your `.dotfiles/config` file to see if the untracked files are shown.
-If not, run:
+The contens should be:
+```config
+[core]
+	repositoryformatversion = 0
+	filemode = true
+	bare = true
+[remote "origin"]
+	url = git@github.com:svic321/dotfiles.git
+	fetch = +refs/heads/*:refs/remotes/origin/*
+[status]
+	showUntrackedFiles = no
+[branch "master"]
+	remote = origin
+	merge = refs/heads/master
+```
+
+To turn the tracking of untracked files off, use the following command:
 ```bash
 dotfiles config --local status.showUntrackedFiles no
 ```
 
-> fdfsdf
-> fdsfds
+> [!caution]
+> Pay close attention to the `[remote "origin"]` section. If the `fetch` line is not present, add it manually, else the remote branch won't be fetched.
 
-> [!note]
-> fdsfdsf
-> fds
+### Tips
 
-
+To list all the current dotfiles in the repo, use the following command:
+```bash
+dotfiles ls-tree -r --name-only HEAD
+```
