@@ -1,13 +1,13 @@
 # README
-Firs, install the the folling programs by your self:
+First, install the the folling programs by your self:
 - latest git version
 - zsh
 - oh-my-zsh (which will autocally set zsh as your default shell)
 - fzf
 - delta
 - ripgrep
-- bat
-- fdfin
+- batcat
+- fdfind
 
 For detailed instructions, see check [this file](Set-up.md#insallation-for-the-following-programs) file.
 
@@ -86,6 +86,32 @@ dotfiles config --local status.showUntrackedFiles no
 
 > [!caution]
 > Pay close attention to the `[remote "origin"]` section. If the `fetch` line is not present, add it manually, else the remote branch won't be fetched.
+
+### .gitconfig
+
+Add the following lines to your `~/.gitconfig` file:
+
+```config
+[interactive]
+  diffFilter = delta --color-only
+
+[delta]
+  navigate = true  # use n and N to move between diff sections
+  ; dark = true      # or light = true, or omit for auto-detection
+  features = artic-fox
+  side-by-side = true
+
+[merge]
+  conflictstyle = zdiff3
+  tool = nvimdiff
+
+[include]
+  path = ~/.config/bat/themes/themes.gitconfig
+
+[pager]
+  diff = delta
+```
+
 
 ### Tips
 
