@@ -22,6 +22,21 @@ lf () {
   fi
 }
 
+# change for insert command from history
+fzf_history_insert() {
+  # Run the fzf search on history
+  local selected_command=$(fc -l 1 | fzf --reverse | sed 's/^[ *]*[0-9]*[ \t]*//')
+
+  # If a command was selected, insert it at the cursor
+  if [[ -n $selected_command ]]; then
+    LBUFFER="${LBUFFER}${selected_command}"
+  fi
+}
+
+# Bind the widget to Ctrl-O
+zle -N fzf_history_insert
+bindkey '^O' fzf_history_insert
+
 # zsh VI mode configuration
 bindkey "^H" backward-kill-word
 export VI_MODE_SET_CURSOR=true
