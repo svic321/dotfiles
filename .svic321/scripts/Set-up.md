@@ -3,10 +3,6 @@
 Here I will detail the installation steps for the my dotfiles.
 
 
-## heading 2
+## Insallation for the following programs
 
-
-
-### heading 3
-
-
+fdfd
