@@ -9,7 +9,7 @@ Firs, install the the folling programs by your self:
 - bat
 - fdfin
 
-For detailed instructions, see check [this file](.Set-up.md#insallation-for-the-following-programs) file.
+For detailed instructions, see check [this file](Set-up.md#insallation-for-the-following-programs) file.
 
 ## Configuration
 
