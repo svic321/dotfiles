@@ -40,3 +40,25 @@ vim.keymap.set('n', '<leader>h', ':nohlsearch<CR>')
 vim.opt.list = true
 vim.o.wrap = false
 vim.opt.listchars:append("extends:↩")
+
+-- Configure Markdown-specific settings
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = "markdown",
+    callback = function()
+        vim.wo.wrap = true
+        vim.wo.linebreak = true
+        -- vim.wo.colorcolumn = "80"
+    end,
+})
+
+-- Reset settings for non-Markdown files
+vim.api.nvim_create_autocmd("BufWinEnter", {
+    callback = function()
+        if vim.bo.filetype ~= "markdown" then
+            vim.wo.wrap = false
+            vim.wo.linebreak = false
+            -- vim.wo.colorcolumn = ""
+        end
+    end,
+})
+
