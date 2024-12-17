@@ -9,4 +9,4 @@ Firs, install the the folling programs by your self:
 - bat
 - fdfin
 
-Check this out [[set-up]] 
+Check this out [files](/Set-up.md)
