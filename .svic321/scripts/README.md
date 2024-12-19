@@ -118,4 +118,6 @@ Add the following lines to your `~/.gitconfig` file:
 To list all the current dotfiles in the repo, use the following command:
 ```bash
 dotfiles ls-tree -r --name-only HEAD
+# and to list all the local files, use
+tree -ifF | grep -v '/$' |  sed 's|^\./||' | head -n -2
 ```

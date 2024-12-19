@@ -29,6 +29,12 @@ lf () {
   fi
 }
 
+
+# diff dotfiles
+dotdiff() {
+  delta <(tree -ifF | grep -v '/$' | sed -e 's|^\./||' -e 's|\*$||' | head -n -2 | sort) <(dotfiles ls-tree -r --name-only HEAD | sort)
+}
+
 # change for insert command from history
 fzf_history_insert() {
   # Run the fzf search on history
