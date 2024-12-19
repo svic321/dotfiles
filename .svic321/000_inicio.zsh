@@ -10,6 +10,13 @@ if [[ -f ~/.svic321/fzf-zsh-completion.sh ]]; then
   source ~/.svic321/fzf-zsh-completion.sh
 fi
 
+# loading my custom binaries
+
+if [[ -d ~/.svic321/bin ]]; then
+  export PATH=$PATH:~/.svic321/bin
+fi
+
+
 # lf configuration
 
 lf () {
