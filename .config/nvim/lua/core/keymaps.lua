@@ -62,3 +62,7 @@ vim.api.nvim_create_autocmd("BufWinEnter", {
     end,
 })
 
+-- Example for Lua config in Neovim
+vim.api.nvim_set_keymap('n', '<C-L>', 'zl', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', '<C-H>', 'zh', { noremap = true, silent = true })
+
