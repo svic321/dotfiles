@@ -1,5 +1,8 @@
 #!/bin/bash
-items=("hotkeys.json" "snippets")
+
+dir_obsidian="$HOME/.svic321/obsidian"
+
+items=($(ls -A "$dir_obsidian"))
 
 # color codes
 Red='\e[31m'
