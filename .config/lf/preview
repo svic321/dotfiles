@@ -37,7 +37,8 @@ case "$(printf "%s\n" "$(readlink -f "$1")" | awk '{print tolower($0)}')" in
 	*.tar.bz2|*.tbz2) tar tjf "$1" ;;
 	*.tar.txz|*.txz) xz --list "$1" ;;
 	*.tar) tar tf "$1" ;;
-	*.zip|*.jar|*.war|*.ear|*.oxt) unzip -l "$1" | tail -n +4 | head -n -2 | sort -k 4;;
+	*.zip|*.jar|*.war|*.ear|*.oxt) { unzip -l "$1" | head -3; unzip -l "$1" | grep '/$'; unzip -l "$1" | tail -2; };;
+	# *.zip|*.jar|*.war|*.ear|*.oxt) unzip -l "$1" | grep '/$';;
 	*.gz) gzip -l "$1" ;;
 	*.rar) unrar l "$1" ;;
 	*.md|*.json) batorcat "$1";;
