@@ -8,6 +8,8 @@ First, install the the folling programs by your self:
 - ripgrep
 - batcat
 - fdfind
+- node
+- `npm install --global yarn`
 
 For detailed instructions, see check [this file](Set-up.md#insallation-for-the-following-programs) file.
 
