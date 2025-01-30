@@ -1,0 +1,7 @@
+#!/bin/bash
+
+dir_tmux="$HOME/.tmux/plugins/tpm/src"
+
+rm $dir_tmux/nord-status-content.conf $dir_tmux/nord.conf
+ln -s $HOME/.svic321/tmux/nord-status-content.conf $dir_tmux/nord-status-content.conf
+ln -s $HOME/.svic321/tmux/nord.conf $dir_tmux/nord.conf
