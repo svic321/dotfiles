@@ -16,6 +16,10 @@ if [[ -d ~/.svic321/bin ]]; then
   export PATH=$PATH:~/.svic321/bin
 fi
 
+if [[ -d ~/.local/bin ]]; then
+  export PATH=$PATH:~/.local/bin
+fi
+
 
 # lf configuration
 
