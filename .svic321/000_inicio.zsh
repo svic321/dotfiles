@@ -15,15 +15,9 @@ fi
 if [[ -d ~/.svic321/bin ]]; then
   export PATH=$PATH:~/.svic321/bin
 fi
-
+# path for python binaries
 if [[ -d ~/.local/bin ]]; then
   export PATH=$PATH:~/.local/bin
-fi
-
-# SSH AGENT configuration
-export SSH_AUTH_SOCK=$(find /tmp -type s -name "agent.*" 2>/dev/null | head -n 1)
-if [ -z "$SSH_AUTH_SOCK" ]; then
-    eval "$(ssh-agent -s)" > /dev/null
 fi
 
 
