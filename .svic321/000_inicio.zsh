@@ -20,6 +20,11 @@ if [[ -d ~/.local/bin ]]; then
   export PATH=$PATH:~/.local/bin
 fi
 
+# ssh agent
+if ! pgrep -u "$USER" ssh-agent > /dev/null; then
+  eval "$(ssh-agent -s)" > /dev/null
+fi
+
 
 # lf configuration
 
