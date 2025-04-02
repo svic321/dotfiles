@@ -38,6 +38,13 @@ lf () {
   fi
 }
 
+# my custom aliases
+
+alias ez='eza --long --color=always --git --no-filesize --icons=always --no-time'
+
+# zoxide
+
+eval "$(zoxide init zsh)"
 
 # diff dotfiles
 dotdiff() {
