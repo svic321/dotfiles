@@ -100,7 +100,7 @@ Add the following lines to your `~/.gitconfig` file:
 [delta]
   navigate = true  # use n and N to move between diff sections
   ; dark = true      # or light = true, or omit for auto-detection
-  features = artic-fox
+  features = "arctic-fox"
   side-by-side = true
 
 [merge]
