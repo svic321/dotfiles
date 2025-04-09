@@ -91,27 +91,15 @@ dotfiles config --local status.showUntrackedFiles no
 
 ### .gitconfig
 
-Add the following lines to your `~/.gitconfig` file:
+Your `~/.gitconfig` file should look like this:
 
 ```config
-[interactive]
-  diffFilter = delta --color-only
-
-[delta]
-  navigate = true  # use n and N to move between diff sections
-  ; dark = true      # or light = true, or omit for auto-detection
-  features = "arctic-fox"
-  side-by-side = true
-
-[merge]
-  conflictstyle = zdiff3
-  tool = nvimdiff
+[user]
+  name = <name>
+  email = <email>
 
 [include]
-  path = ~/.config/bat/themes/themes.gitconfig
-
-[pager]
-  diff = delta
+  path = ~/.svic321/git/.gitconfig
 ```
 
 
