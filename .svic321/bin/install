@@ -46,28 +46,27 @@ else
 fi
 
 
-# # add custom git config
-# git config --global include.path ~/.svic321/git/.gitconfig
-# # use zsh plugins
-# sed -i '/plugins=(git)/c\
-# plugins=(\
-#   git\
-#   docker\
-#   zsh-syntax-highlighting\
-#   zsh-autosuggestions\
-#   vi-mode\
-#   command-not-found\
-#   colored-man-pages\
-# )' ~/.zshrc
+# add custom git config
+git config --global include.path ~/.svic321/git/.gitconfig
+# use zsh plugins
+sed -i '/plugins=(git)/c\
+plugins=(\
+  git\
+  docker\
+  zsh-syntax-highlighting\
+  zsh-autosuggestions\
+  vi-mode\
+  command-not-found\
+  colored-man-pages\
+)' ~/.zshrc
 
 
-# # Add custom sourcing block after "# User configuration"
-# sed -i '/# User configuration/a\
-# if [[ -f ~/.svic321/zshrc.zsh ]]; then\
-#   source ~/.svic321/zshrc.zsh\
-# fi' ~/.zshrc
+# Add custom sourcing block after "# User configuration"
+sed -i '/# User configuration/a\
+if [[ -f ~/.svic321/zshrc.zsh ]]; then\
+  source ~/.svic321/zshrc.zsh\
+fi' ~/.zshrc
 
-# #!/bin/bash
 
 # # Check if ~/.zprofile exists
 # if [[ -f ~/.zprofile ]]; then
