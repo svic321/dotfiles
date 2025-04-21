@@ -17,20 +17,16 @@ if git clone --bare git@github.com:svic321/dotfiles.git $HOME/.dotfiles; then \
     fi
 
 # Set up the alias for dotfiles
-dotfiles() {
-  /usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME "$@"
-}
-
-dotfiles config --local status.showUntrackedFiles no
-
+# alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME' && \
+/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME config --local status.showUntrackedFiles no
 
 # Attempt to check out dotfiles
-if ! dotfiles checkout; then
+if ! /usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME checkout; then
   echo "Conflicting files detected. Backing them up and retrying..."
   mkdir -p .dotfiles-backup && \
   dotfiles checkout 2>&1 | egrep "\s+\." | awk {'print $1'} | \
   xargs -I{} sh -c 'mkdir -p "$(dirname ".dotfiles-backup/{}")" && mv "{}" ".dotfiles-backup/{}"'
-  dotfiles checkout
+  /usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME checkout
 fi
 # add custom git config
 git config --global include.path ~/.svic321/git/.gitconfig
