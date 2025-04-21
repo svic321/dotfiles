@@ -81,3 +81,4 @@ else
 fi
 
 sudo apt install ./.svic321/my_progs/*.deb -y
+for file in ~/.svic321/my_progs/*.tar.gz; do tar -xzvf "$file" -C ~/.local/bin; done
