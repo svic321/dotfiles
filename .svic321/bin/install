@@ -1,4 +1,24 @@
 #!/bin/bash
 
-echo "Installing Obsidian..."
-touch dummy.txt
+
+git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+
+
+sed -i '/plugins=(git)/c\
+plugins=(\
+  git\
+  docker\
+  zsh-syntax-highlighting\
+  zsh-autosuggestions\
+  vi-mode\
+  command-not-found\
+  colored-man-pages\
+)' ~/.zshrc
+
+
+# Add custom sourcing block after "# User configuration"
+sed -i '/# User configuration/a\
+if [[ -f ~/.svic321/zshrc.zsh ]]; then\
+  source ~/.svic321/zshrc.zsh\
+fi' ~/.zshrc
