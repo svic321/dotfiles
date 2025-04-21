@@ -70,17 +70,17 @@ fi
 
 
 
-# # Check if ~/.zprofile exists
-# if [[ -f ~/.zprofile ]]; then
-#   # Append the lines if the file exists
-#   echo 'if [[ -f ~/.svic321/zprofile.zsh ]]; then' >> ~/.zprofile
-#   echo '  source ~/.svic321/zprofile.zsh' >> ~/.zprofile
-#   echo 'fi' >> ~/.zprofile
-# else
-#   # Create the file and add the lines if it doesn't exist
-#   cat <<EOL > ~/.zprofile
-# if [[ -f ~/.svic321/zprofile.zsh ]]; then
-#   source ~/.svic321/zprofile.zsh
-# fi
-# EOL
-# fi
+# Check if ~/.zprofile exists
+if [[ -f ~/.zprofile ]]; then
+  # Append the lines if the file exists
+  echo 'if [[ -f ~/.svic321/zprofile.zsh ]]; then' >> ~/.zprofile
+  echo '  source ~/.svic321/zprofile.zsh' >> ~/.zprofile
+  echo 'fi' >> ~/.zprofile
+else
+  # Create the file and add the lines if it doesn't exist
+  cat <<EOL > ~/.zprofile
+if [[ -f ~/.svic321/zprofile.zsh ]]; then
+  source ~/.svic321/zprofile.zsh
+fi
+EOL
+fi
