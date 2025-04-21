@@ -1,68 +1,85 @@
 #!/bin/bash
 
-# install oh-my-zsh
+# # install oh-my-zsh
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
-# install powerlevel10k theme
+# # install powerlevel10k theme
 git clone --depth=1 https://github.com/romkatv/powerlevel10k.git /home/$USERNAME/.oh-my-zsh/custom/themes/powerlevel10k \
     && sed -i 's/ZSH_THEME=".*"/ZSH_THEME="powerlevel10k\/powerlevel10k"/' /home/$USERNAME/.zshrc
 # install zsh plugins
 git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+
+
 # clone dotfiles repo
-if git clone --bare git@github.com:svic321/dotfiles.git $HOME/.dotfiles; then \
-        echo "Cloned using SSH"; \
-    else \
-        echo "Falling back to HTTPS"; \
-        git clone --bare https://github.com/svic321/dotfiles.git $HOME/.dotfiles; \
-    fi
 
-/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME checkout
-# Set up the alias for dotfiles
-# alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME' && \
-# /usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME config --local status.showUntrackedFiles no
+REPO_SSH="git@github.com:svic321/dotfiles"
+REPO_HTTPS="https://github.com/svic321/dotfiles.git"
+TARGET="$HOME/.dotfiles"
 
-# # Attempt to check out dotfiles
-# if ! /usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME checkout; then
-#   echo "Conflicting files detected. Backing them up and retrying..."
-#   mkdir -p .dotfiles-backup && \
-#   dotfiles checkout 2>&1 | egrep "\s+\." | awk {'print $1'} | \
-#   xargs -I{} sh -c 'mkdir -p "$(dirname ".dotfiles-backup/{}")" && mv "{}" ".dotfiles-backup/{}"'
-#   /usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME checkout
-# fi
-# add custom git config
-git config --global include.path ~/.svic321/git/.gitconfig
-# use zsh plugins
-sed -i '/plugins=(git)/c\
-plugins=(\
-  git\
-  docker\
-  zsh-syntax-highlighting\
-  zsh-autosuggestions\
-  vi-mode\
-  command-not-found\
-  colored-man-pages\
-)' ~/.zshrc
+echo "Attempting to clone via SSH..."
 
-
-# Add custom sourcing block after "# User configuration"
-sed -i '/# User configuration/a\
-if [[ -f ~/.svic321/zshrc.zsh ]]; then\
-  source ~/.svic321/zshrc.zsh\
-fi' ~/.zshrc
-
-#!/bin/bash
-
-# Check if ~/.zprofile exists
-if [[ -f ~/.zprofile ]]; then
-  # Append the lines if the file exists
-  echo 'if [[ -f ~/.svic321/zprofile.zsh ]]; then' >> ~/.zprofile
-  echo '  source ~/.svic321/zprofile.zsh' >> ~/.zprofile
-  echo 'fi' >> ~/.zprofile
+if GIT_SSH_COMMAND="ssh -o StrictHostKeyChecking=no" git clone --bare "$REPO_SSH" "$TARGET"; then
+    echo "Successfully cloned via SSH."
 else
-  # Create the file and add the lines if it doesn't exist
-  cat <<EOL > ~/.zprofile
-if [[ -f ~/.svic321/zprofile.zsh ]]; then
-  source ~/.svic321/zprofile.zsh
+    echo "SSH clone failed. Trying HTTPS..."
+    if git clone --bare "$REPO_HTTPS" "$TARGET"; then
+        echo "Successfully cloned via HTTPS."
+    else
+        echo "Both SSH and HTTPS clone attempts failed."
+        exit 1
+    fi
 fi
-EOL
+
+echo "Configuring dotfiles repo..."
+
+GIT_CMD="/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME"
+
+$GIT_CMD config --local status.showUntrackedFiles no
+
+if $GIT_CMD checkout; then
+    echo "Dotfiles successfully checked out."
+else
+    mkdir -p .dotfiles-backup && \
+    $GIT_CMD checkout 2>&1 | egrep "\s+\." | awk {'print $1'} | \
+    xargs -I{} sh -c 'mkdir -p "$(dirname ".dotfiles-backup/{}")" && mv "{}" ".dotfiles-backup/{}"'
+    echo "Some files already exist. Backed them up to .dotfiles-backup."
 fi
+
+
+# # add custom git config
+# git config --global include.path ~/.svic321/git/.gitconfig
+# # use zsh plugins
+# sed -i '/plugins=(git)/c\
+# plugins=(\
+#   git\
+#   docker\
+#   zsh-syntax-highlighting\
+#   zsh-autosuggestions\
+#   vi-mode\
+#   command-not-found\
+#   colored-man-pages\
+# )' ~/.zshrc
+
+
+# # Add custom sourcing block after "# User configuration"
+# sed -i '/# User configuration/a\
+# if [[ -f ~/.svic321/zshrc.zsh ]]; then\
+#   source ~/.svic321/zshrc.zsh\
+# fi' ~/.zshrc
+
+# #!/bin/bash
+
+# # Check if ~/.zprofile exists
+# if [[ -f ~/.zprofile ]]; then
+#   # Append the lines if the file exists
+#   echo 'if [[ -f ~/.svic321/zprofile.zsh ]]; then' >> ~/.zprofile
+#   echo '  source ~/.svic321/zprofile.zsh' >> ~/.zprofile
+#   echo 'fi' >> ~/.zprofile
+# else
+#   # Create the file and add the lines if it doesn't exist
+#   cat <<EOL > ~/.zprofile
+# if [[ -f ~/.svic321/zprofile.zsh ]]; then
+#   source ~/.svic321/zprofile.zsh
+# fi
+# EOL
+# fi
