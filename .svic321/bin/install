@@ -11,9 +11,7 @@ git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:
 
 # Check if ~/.zprofile exists
 
-echo 'if [[ -f ~/.svic321/zprofile.zsh ]]; then' >> ~/.zprofile
-echo '  source ~/.svic321/zprofile.zsh' >> ~/.zprofile
-echo 'fi' >> ~/.zprofile
+printf '\nif [[ -f ~/.svic321/zprofile.zsh ]]; then\n  source ~/.svic321/zprofile.zsh\nfi\n' >> ~/.zprofile
 
 
 # add custom git config
