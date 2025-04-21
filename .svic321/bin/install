@@ -9,6 +9,21 @@
 git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
 
+# Check if ~/.zprofile exists
+if [[ -f ~/.zprofile ]]; then
+  # Append the lines if the file exists
+  echo 'if [[ -f ~/.svic321/zprofile.zsh ]]; then' >> ~/.zprofile
+  echo '  source ~/.svic321/zprofile.zsh' >> ~/.zprofile
+  echo 'fi' >> ~/.zprofile
+else
+  # Create the file and add the lines if it doesn't exist
+  cat <<EOL > ~/.zprofile
+if [[ -f ~/.svic321/zprofile.zsh ]]; then
+  source ~/.svic321/zprofile.zsh
+fi
+EOL
+fi
+
 
 # add custom git config
 git config --global include.path ~/.svic321/git/.gitconfig
@@ -64,23 +79,4 @@ else
     $GIT_CMD checkout 2>&1 | egrep "\s+\." | awk {'print $1'} | \
     xargs -I{} sh -c 'mkdir -p "$(dirname ".dotfiles-backup/{}")" && mv "{}" ".dotfiles-backup/{}"'
     echo "Some files already exist. Backed them up to .dotfiles-backup."
-fi
-
-
-
-
-
-# Check if ~/.zprofile exists
-if [[ -f ~/.zprofile ]]; then
-  # Append the lines if the file exists
-  echo 'if [[ -f ~/.svic321/zprofile.zsh ]]; then' >> ~/.zprofile
-  echo '  source ~/.svic321/zprofile.zsh' >> ~/.zprofile
-  echo 'fi' >> ~/.zprofile
-else
-  # Create the file and add the lines if it doesn't exist
-  cat <<EOL > ~/.zprofile
-if [[ -f ~/.svic321/zprofile.zsh ]]; then
-  source ~/.svic321/zprofile.zsh
-fi
-EOL
 fi
