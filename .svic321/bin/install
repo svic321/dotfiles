@@ -9,6 +9,14 @@
 git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
 
+# Install fzf (fuzzy finder) in unattended mode
+git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf
+~/.fzf/install --all
+
+# Add fzf configuration to Zsh
+echo -e "\n# fzf configuration" >> ~/.zshrc
+echo "[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh" >> ~/.zshrc
+
 # Check if ~/.zprofile exists
 
 echo 'if [[ -f ~/.svic321/zprofile.zsh ]]; then' >> $HOME/.zprofile
