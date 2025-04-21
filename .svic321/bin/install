@@ -16,8 +16,13 @@ if git clone --bare git@github.com:svic321/dotfiles.git $HOME/.dotfiles; then \
         git clone --bare https://github.com/svic321/dotfiles.git $HOME/.dotfiles; \
     fi
 
-alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
+# Set up the alias for dotfiles
+dotfiles() {
+  /usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME "$@"
+}
+
 dotfiles config --local status.showUntrackedFiles no
+
 
 # Attempt to check out dotfiles
 if ! dotfiles checkout; then
