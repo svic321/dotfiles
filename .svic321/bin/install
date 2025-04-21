@@ -76,3 +76,5 @@ else
     xargs -I{} sh -c 'mkdir -p "$(dirname ".dotfiles-backup/{}")" && mv "{}" ".dotfiles-backup/{}"'
     echo "Some files already exist. Backed them up to .dotfiles-backup."
 fi
+
+sudo apt install ./$HOME/.svic321/my_progs/*.deb
