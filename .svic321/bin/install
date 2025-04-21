@@ -1,8 +1,18 @@
 #!/bin/bash
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
 
+git clone --depth=1 https://github.com/romkatv/powerlevel10k.git /home/$USERNAME/.oh-my-zsh/custom/themes/powerlevel10k \
+    && sed -i 's/ZSH_THEME=".*"/ZSH_THEME="powerlevel10k\/powerlevel10k"/' /home/$USERNAME/.zshrc
 
 git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+
+if git clone --bare git@github.com:svic321/dotfiles.git $HOME/.dotfiles; then \
+        echo "Cloned using SSH"; \
+    else \
+        echo "Falling back to HTTPS"; \
+        git clone --bare https://github.com/svic321/dotfiles.git $HOME/.dotfiles; \
+    fi
 
 
 sed -i '/plugins=(git)/c\
