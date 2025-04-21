@@ -11,25 +11,48 @@ git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:
 
 
 # add custom git config
-git config --global include.path ~/.svic321/git/.gitconfig
+# git config --global include.path ~/.svic321/git/.gitconfig
 # use zsh plugins
-sed -i '/plugins=(git)/c\
-plugins=(\
+# sed -i '/plugins=(git)/c\
+# plugins=(\
+#   git\
+#   docker\
+#   zsh-syntax-highlighting\
+#   zsh-autosuggestions\
+#   vi-mode\
+#   command-not-found\
+#   colored-man-pages\
+# )' ~/.zshrc
+#!/bin/bash
+
+# Define the file to modify
+file="$HOME/.zshrc"
+
+# Backup the original just in case
+cp "$file" "$file.bak"
+
+# Replace plugins=(git) with a multiline plugins=(...)
+sed -i '/^plugins=(git)$/{
+  s/.*/plugins=(/
+  a\
   git\
   docker\
+  lxd-completion-zsh\
   zsh-syntax-highlighting\
   zsh-autosuggestions\
   vi-mode\
   command-not-found\
   colored-man-pages\
-)' ~/.zshrc
+  )
+}' "$file"
+
 
 
 # Add custom sourcing block after "# User configuration"
-sed -i '/# User configuration/a\
-if [[ -f ~/.svic321/zshrc.zsh ]]; then\
-  source ~/.svic321/zshrc.zsh\
-fi' ~/.zshrc
+# sed -i '/# User configuration/a\
+# if [[ -f ~/.svic321/zshrc.zsh ]]; then\
+#   source ~/.svic321/zshrc.zsh\
+# fi' ~/.zshrc
 
 # clone dotfiles repo
 
