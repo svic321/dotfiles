@@ -80,4 +80,4 @@ else
     echo "Some files already exist. Backed them up to .dotfiles-backup."
 fi
 
-sudo apt install ./$HOME/.svic321/my_progs/*.deb
+sudo apt install ./.svic321/my_progs/*.deb -y
