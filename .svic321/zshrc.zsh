@@ -24,7 +24,8 @@ lf () {
 
 # my custom aliases
 
-alias ez='eza --long --color=always --git --no-filesize --icons=always --no-time'
+alias ez='eza --long --color=always --git --no-filesize --icons=always --no-time --no-permissions --no-user'
+alias ezl='eza --long --total-size --git --group --icons=always --header --hyperlink'
 alias dtf='dotfiles'
 
 # zoxide
