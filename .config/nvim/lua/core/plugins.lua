@@ -16,6 +16,7 @@ vim.g.mapleader = " " -- Make sure to set `mapleader` before lazy so your mappin
 
 require("lazy").setup({
   "folke/which-key.nvim",
+  "nvim-treesitter/nvim-treesitter-context",
   { "folke/neoconf.nvim", cmd = "Neoconf" },
   "folke/neodev.nvim",
   {"nvim-treesitter/nvim-treesitter", build = ":TSUpdate"},
