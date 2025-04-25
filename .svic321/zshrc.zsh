@@ -14,7 +14,7 @@ fi
 
 lf () {
   tmp="$(mktemp)"
-  command lf -last-dir-path="$tmp" "$@"
+  command lfrun -last-dir-path="$tmp" "$@"
   if [ -f "$tmp" ]; then
     dir="$(cat "$tmp")"
     rm -f "$tmp"
