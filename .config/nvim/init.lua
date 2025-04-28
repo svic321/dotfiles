@@ -1,3 +1,2 @@
-require("core.keymaps")
-require("core.plugins")
-vim.cmd [[ colorscheme tokyonight ]]
+-- bootstrap lazy.nvim, LazyVim and your plugins
+require("config.lazy")
