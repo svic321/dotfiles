@@ -14,4 +14,5 @@ return {
     ---@type render.md.UserConfig
     opts = {},
   },
+  { "bullets-vim/bullets.vim" },
 }
