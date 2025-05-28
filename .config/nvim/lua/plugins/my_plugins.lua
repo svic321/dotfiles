@@ -3,6 +3,9 @@ return {
     "folke/tokyonight.nvim",
     opts = {
       transparent = true,
+      on_colors = function(colors)
+        colors.border = colors.blue1
+      end,
     },
   },
   {
