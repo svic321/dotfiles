@@ -59,8 +59,12 @@ Once that done, attemp again to checkout the repo.
 
 After, add the following lines to your `.zshrc` file:
 ```bash
-if [[ -f ~/.svic321/000_inicio.zsh ]]; then
-  source ~/.svic321/000_inicio.zsh
+if [[ -f ~/.svic321/zshrc.zsh ]]; then
+  source ~/.svic321/zshrc.zsh
+fi
+
+if [[ -f ~/.svic321/zprofile.zsh ]]; then
+  source ~/.svic321/zprofile.zsh
 fi
 ```
 
