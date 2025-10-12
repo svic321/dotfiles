@@ -8,7 +8,7 @@ return {
       end,
       on_highlights = function(highlights, colors)
         highlights.BufferlineindicatorVisible = { bg = "#636DA6" }
-        highlights.BufferlineindicatorSelected = { bg = colors.blue1 }
+        -- highlights.BufferlineindicatorSelected = { bg = colors.blue1 }
       end,
     },
   },
@@ -22,6 +22,7 @@ return {
     opts = {},
   },
   { "bullets-vim/bullets.vim" },
+  { "nvim-treesitter/nvim-treesitter-context", opts = {} },
   {
     "norcalli/nvim-colorizer.lua",
     config = function()
@@ -37,5 +38,31 @@ return {
         lualine_z = { "location" },
       }
     end,
+  },
+  {
+    "folke/snacks.nvim",
+    priority = 1000,
+    lazy = false,
+    ---@type snacks.Config
+    opts = {
+      explorer = { enabled = true }, -- NOT HERE!
+      picker = {
+        enabled = true,
+        sources = {
+          explorer = { -- HERE!
+            enabled = true,
+            hidden = true,
+            auto_close = false,
+            win = {
+              list = {
+                keys = {
+                  ["O"] = { { "pick_win", "jump" }, mode = { "n", "i" } },
+                },
+              },
+            },
+          },
+        },
+      },
+    },
   },
 }
