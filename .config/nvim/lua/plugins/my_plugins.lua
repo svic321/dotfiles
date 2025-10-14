@@ -22,6 +22,7 @@ return {
     opts = {},
   },
   { "bullets-vim/bullets.vim" },
+  { "godlygeek/tabular" },
   { "nvim-treesitter/nvim-treesitter-context", opts = {} },
   {
     "norcalli/nvim-colorizer.lua",
