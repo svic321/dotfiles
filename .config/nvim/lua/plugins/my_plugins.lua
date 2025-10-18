@@ -23,6 +23,10 @@ return {
   },
   { "bullets-vim/bullets.vim" },
   { "godlygeek/tabular" },
+  {
+    "kevinhwang91/nvim-ufo",
+    dependencies = { "kevinhwang91/promise-async" },
+  },
   { "nvim-treesitter/nvim-treesitter-context", opts = {} },
   {
     "norcalli/nvim-colorizer.lua",
@@ -51,9 +55,27 @@ return {
         enabled = true,
         sources = {
           explorer = { -- HERE!
+            layout = {
+              { preview = true },
+              layout = {
+                winblend = 10,
+                box = "horizontal",
+                width = 0.8,
+                height = 0.8,
+                {
+                  box = "vertical",
+                  border = "rounded",
+                  title = "{source} {live} {flags}",
+                  title_pos = "center",
+                  { win = "input", height = 1, border = "bottom" },
+                  { win = "list", border = "none" },
+                },
+                { win = "preview", border = "rounded", width = 0.7, title = "{preview}" },
+              },
+            },
             enabled = true,
             hidden = true,
-            auto_close = false,
+            auto_close = true,
             win = {
               list = {
                 keys = {
