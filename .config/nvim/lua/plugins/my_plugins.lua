@@ -75,6 +75,7 @@ return {
             },
             enabled = true,
             hidden = true,
+            ignored = true,
             auto_close = true,
             win = {
               list = {
