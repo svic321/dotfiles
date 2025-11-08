@@ -54,6 +54,10 @@ return {
       picker = {
         enabled = true,
         sources = {
+          files = {
+            hidden = true,
+            ignored = true,
+          },
           explorer = { -- HERE!
             layout = {
               { preview = true },
