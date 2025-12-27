@@ -6,8 +6,12 @@ return {
       on_colors = function(colors)
         colors.border = colors.blue1
       end,
-      on_highlights = function(highlights, colors)
-        highlights.BufferlineindicatorVisible = { bg = "#636DA6" }
+      on_highlights = function(hl, c)
+        hl.BufferlineindicatorVisible = { bg = "#636DA6" }
+        hl.IndentBlanklineIndent1 = { bg = "#363736" }
+        hl.IndentBlanklineIndent2 = { bg = "#2d3739" }
+        hl.IndentBlanklineIndent3 = { bg = "#362f41" }
+        hl.IndentBlanklineIndent4 = { bg = "#2b3740" }
         -- highlights.BufferlineindicatorSelected = { bg = colors.blue1 }
       end,
     },
@@ -43,6 +47,24 @@ return {
         lualine_z = { "location" },
       }
     end,
+  },
+  {
+    "lukas-reineke/indent-blankline.nvim",
+    main = "ibl",
+    opts = {
+      whitespace = {
+        highlight = {
+          "IndentBlanklineIndent1",
+          "IndentBlanklineIndent2",
+          "IndentBlanklineIndent3",
+          "IndentBlanklineIndent4",
+        },
+        remove_blankline_trail = true,
+      },
+      scope = {
+        enabled = false,
+      },
+    },
   },
   {
     "folke/snacks.nvim",
