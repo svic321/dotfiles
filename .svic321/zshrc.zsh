@@ -81,3 +81,21 @@ alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 
 # test change
 # test change 2
+#
+
+# Stable agent socket path
+export SSH_AUTH_SOCK="${XDG_RUNTIME_DIR:-$HOME/.ssh}/ssh-agent.sock"
+
+# Start agent only if no reachable agent is on that socket
+ssh-add -l >/dev/null 2>&1
+if [[ $? -eq 2 ]]; then
+  mkdir -p "${SSH_AUTH_SOCK%/*}"
+  rm -f "$SSH_AUTH_SOCK"
+  ssh-agent -a "$SSH_AUTH_SOCK" >/dev/null
+fi
+
+# Auto-load default key once per fresh agent (exit code 1 = agent alive, no keys)
+ssh-add -l >/dev/null 2>&1
+if [[ $? -eq 1 ]]; then
+  ssh-add "$HOME/.ssh/id_ed25519" </dev/null
+fi
