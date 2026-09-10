@@ -79,19 +79,17 @@ export VI_MODE_SET_CURSOR=true
 # bare git repository configuration
 alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 
-# test change
-# test change 2
-#
-
-# Stable agent socket path
-export SSH_AUTH_SOCK="${XDG_RUNTIME_DIR:-$HOME/.ssh}/ssh-agent.sock"
-
-# Start agent only if no reachable agent is on that socket
+# Reuse an already-reachable agent (e.g. one forwarded into a devcontainer) if present
 ssh-add -l >/dev/null 2>&1
 if [[ $? -eq 2 ]]; then
-  mkdir -p "${SSH_AUTH_SOCK%/*}"
-  rm -f "$SSH_AUTH_SOCK"
-  ssh-agent -a "$SSH_AUTH_SOCK" >/dev/null
+  # No agent reachable on the current socket - fall back to a stable local one
+  export SSH_AUTH_SOCK="${XDG_RUNTIME_DIR:-$HOME/.ssh}/ssh-agent.sock"
+  ssh-add -l >/dev/null 2>&1
+  if [[ $? -eq 2 ]]; then
+    mkdir -p "${SSH_AUTH_SOCK%/*}"
+    rm -f "$SSH_AUTH_SOCK"
+    ssh-agent -a "$SSH_AUTH_SOCK" >/dev/null
+  fi
 fi
 
 # Auto-load default key once per fresh agent (exit code 1 = agent alive, no keys)
